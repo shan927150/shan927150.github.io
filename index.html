@@ -1,11 +1,220 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><title>Yushan Li</title></head>
-<body style="font-family:sans-serif;max-width:640px;margin:40px auto;line-height:1.6">
-  <h1>Yushan Li</h1>
-  <p>Undergraduate Student, Mathematics &amp; Computer Science<br>
-     University of Illinois Urbana-Champaign</p>
-  <p>Email: yushanl8 [at] illinois [dot] edu</p>
-  <p><a href="https://github.com/shan927150">GitHub</a></p>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yushan Li</title>
+  <meta name="description" content="Yushan Li — Undergraduate in Mathematics & Computer Science at UIUC.">
+  <style>
+    :root {
+      --bg: #1b1b1d;
+      --bg-soft: #232326;
+      --text: #ececec;
+      --muted: #9a9aa0;
+      --accent: #f08a4b;
+      --accent-2: #8fb3e0;
+      --line: rgba(255,255,255,0.08);
+    }
+    [data-theme="light"] {
+      --bg: #faf8f5;
+      --bg-soft: #ffffff;
+      --text: #222226;
+      --muted: #6b6b72;
+      --accent: #e0692a;
+      --accent-2: #4f86b8;
+      --line: rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      transition: background .3s, color .3s;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* soft background glow */
+    .glow {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(600px 400px at 20% 15%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
+        radial-gradient(500px 400px at 85% 80%, color-mix(in srgb, var(--accent-2) 12%, transparent), transparent 70%);
+    }
+
+    /* nav */
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      max-width: 1100px; margin: 0 auto; padding: 22px 32px;
+      backdrop-filter: blur(8px);
+    }
+    .brand { font-weight: 700; letter-spacing: .12em; font-size: 15px; }
+    .links { display: flex; gap: 28px; font-size: 15px; font-weight: 500; }
+    .links a { color: var(--muted); transition: color .2s; }
+    .links a:hover { color: var(--text); }
+
+    /* hero */
+    .hero {
+      min-height: calc(100vh - 80px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 40px 24px 80px;
+      animation: rise .9s ease both;
+    }
+    .avatar {
+      width: 184px; height: 184px; border-radius: 50%;
+      padding: 4px;
+      background: conic-gradient(from 200deg, var(--accent), var(--accent-2), var(--accent));
+      margin-bottom: 28px;
+    }
+    .avatar-inner {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: var(--bg-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 54px; font-weight: 700; letter-spacing: .04em;
+      color: var(--text);
+      overflow: hidden;
+    }
+    /* to use a photo: put photo.jpg in the repo and replace "YL" with <img src="photo.jpg" alt="Yushan Li"> */
+    .avatar-inner img { width: 100%; height: 100%; object-fit: cover; }
+
+    h1 { font-size: clamp(32px, 5vw, 44px); font-weight: 700; margin-bottom: 10px; }
+    .tagline { font-size: 19px; font-weight: 600; }
+    .sub { color: var(--muted); font-size: 16px; margin-top: 4px; }
+
+    .social { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; justify-content: center; }
+    .social a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 16px; border: 1px solid var(--line); border-radius: 999px;
+      font-size: 14px; color: var(--muted); background: var(--bg-soft);
+      transition: transform .2s, color .2s, border-color .2s;
+    }
+    .social a:hover { color: var(--text); border-color: var(--accent); transform: translateY(-2px); }
+    .social svg { width: 18px; height: 18px; }
+
+    .scroll-hint { margin-top: 56px; color: var(--muted); font-size: 13px; letter-spacing: .15em; animation: bob 2s ease-in-out infinite; }
+
+    /* sections */
+    section.block {
+      max-width: 760px; margin: 0 auto; padding: 72px 28px;
+      border-top: 1px solid var(--line);
+    }
+    section.block h2 {
+      font-size: 14px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+    }
+    .placeholder {
+      color: var(--muted); font-style: italic;
+      padding: 22px; border: 1px dashed var(--line); border-radius: 12px;
+    }
+
+    footer { text-align: center; color: var(--muted); font-size: 13px; padding: 40px 20px 50px; }
+
+    /* theme toggle */
+    .toggle {
+      position: fixed; right: 22px; bottom: 22px;
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 1px solid var(--line); background: var(--bg-soft); color: var(--text);
+      cursor: pointer; font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .2s;
+    }
+    .toggle:hover { transform: rotate(20deg); }
+
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+    @media (max-width: 640px) {
+      nav { padding: 16px 18px; }
+      .links { gap: 16px; font-size: 14px; }
+      .brand { display: none; }
+      nav { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <nav>
+    <a href="#" class="brand">YUSHAN LI</a>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="avatar"><div class="avatar-inner"><img src="photo.jpg" alt="Yushan Li"></div></div>
+    <h1>Yushan Li</h1>
+    <p class="tagline">Undergraduate @ UIUC</p>
+    <p class="sub">Mathematics &amp; Computer Science</p>
+
+    <div class="social">
+      <a href="https://github.com/shan927150" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        GitHub
+      </a>
+      <a id="mail" href="#contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
+        Email
+      </a>
+      <a href="https://openreview.net/profile?id=~Yushan_Li11" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+        OpenReview
+      </a>
+    </div>
+
+    <a href="#about" class="scroll-hint">SCROLL ↓</a>
+  </header>
+
+  <section class="block" id="about">
+    <h2>About</h2>
+    <p class="placeholder">Coming soon.</p>
+  </section>
+
+  <section class="block" id="research">
+    <h2>Research</h2>
+    <p class="placeholder">Coming soon.</p>
+  </section>
+
+  <section class="block" id="projects">
+    <h2>Projects</h2>
+    <p class="placeholder">Coming soon.</p>
+  </section>
+
+  <section class="block" id="contact">
+    <h2>Contact</h2>
+    <p>Email: yushanl8 [at] illinois [dot] edu</p>
+  </section>
+
+  <footer>© 2026 Yushan Li</footer>
+
+  <button class="toggle" id="toggle" aria-label="Toggle light/dark theme">☾</button>
+
+  <script>
+    // email link assembled at runtime to reduce spam scraping
+    var user = "yushanl8", domain = "illinois.edu";
+    document.getElementById("mail").href = "mailto:" + user + "@" + domain;
+
+    // light / dark toggle
+    var root = document.documentElement, btn = document.getElementById("toggle");
+    function apply(t) {
+      if (t === "light") { root.setAttribute("data-theme", "light"); btn.textContent = "☀"; }
+      else { root.removeAttribute("data-theme"); btn.textContent = "☾"; }
+    }
+    var saved = null;
+    try { saved = localStorage.getItem("theme"); } catch (e) {}
+    apply(saved);
+    btn.addEventListener("click", function () {
+      var next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      apply(next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+    });
+  </script>
 </body>
 </html>
