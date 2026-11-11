@@ -95,7 +95,7 @@
     .social a:hover { color: var(--text); border-color: var(--accent); transform: translateY(-2px); }
     .social svg { width: 18px; height: 18px; }
 
-    .scroll-hint { margin-top: 56px; color: var(--muted); font-size: 13px; letter-spacing: .15em; animation: bob 2s ease-in-out infinite; }
+    .scroll-hint { margin-top: 48px; color: var(--muted); font-size: 13px; letter-spacing: .15em; animation: bob 2s ease-in-out infinite; }
 
     /* sections */
     section.block {
@@ -154,20 +154,6 @@
     <p class="tagline">Undergraduate @ UIUC</p>
     <p class="sub">Mathematics &amp; Computer Science</p>
 
-    <div class="social">
-      <a href="https://github.com/shan927150" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        GitHub
-      </a>
-      <a id="mail" href="#contact">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
-        Email
-      </a>
-      <a href="https://openreview.net/profile?id=~Yushan_Li11" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
-        OpenReview
-      </a>
-    </div>
 
     <a href="#about" class="scroll-hint">SCROLL ↓</a>
   </header>
@@ -197,10 +183,6 @@
   <button class="toggle" id="toggle" aria-label="Toggle light/dark theme">☾</button>
 
   <script>
-    // email link assembled at runtime to reduce spam scraping
-    var user = "yushanl8", domain = "illinois.edu";
-    document.getElementById("mail").href = "mailto:" + user + "@" + domain;
-
     // light / dark toggle
     var root = document.documentElement, btn = document.getElementById("toggle");
     function apply(t) {
